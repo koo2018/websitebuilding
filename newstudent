@@ -1,0 +1,130 @@
+#!/bin/bash
+
+apache_vhosts="/etc/apache2/sites-available"
+group_home="/home/$1"
+www="/home/$1/$2/www"
+wordpress="/home/$1/$2/www/wordpress"
+
+
+clear
+
+echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+echo "*"
+echo "*  Создаем студента " $2 " в группе "$1
+echo "*"
+echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+echo ""
+
+if ! [ -d $group_home ]; then
+echo 'Создаем директорию '$group_home
+sudo mkdir $group_home
+else
+echo 'Директория группы '$1' уже создана'
+fi
+echo ''
+
+grep "$2:" /etc/passwd >/dev/null
+if [ $? -ne 0 ]; then
+echo 'Создаем пользователя '$2
+sudo useradd -b /home/$1 -g $1 -m -s /bin/bash $2
+else
+echo 'Пользователь '$2' уже существует'
+fi
+echo ''
+
+if ! [ -d $www ]; then
+echo 'Создаем директорию '$www
+sudo mkdir $www
+else
+echo 'Директория '$www' существует'
+fi
+echo ''
+
+if ! [ -d $wordpress ]; then
+echo 'Создаем директорию '$wordpress
+sudo mkdir /home/$1/$2/www/wordpress
+else
+echo 'Директория '$wordpress' существует'
+fi
+echo ''
+
+echo "Устанавливаем владельцев директории "$www" - "$2":"$1
+sudo chown $2:$1 $www
+echo ''
+
+echo "Устанавливаем владельцев директории "$wordpress" - "$2":"$1
+sudo chown $2:$1 $wordpress
+echo ''
+
+echo -e "Устанавливаем пароль для "$2"\n"
+
+sudo passwd $2
+
+echo -e "\nФАЙЛ ДЛЯ АПАЧА\n"
+echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+echo ""
+
+sudo echo "<VirtualHost $2.mediacom.space:80>
+
+DocumentRoot /home/$1/$2/www
+
+<Directory /home/$1/$2/www>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+" | sudo tee $apache_vhosts/$2.conf
+
+echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+echo ""
+
+
+
+echo -n "Включение сайта "$1" на сервере apache2...  "
+sudo a2ensite -q $2
+echo ''
+
+echo -n "Перезапуск apache2...  "
+sudo systemctl reload apache2
+echo "Завершено"
+echo ""
+
+echo -n "Копируем папку WordPress...  "
+
+sudo cp -r /home/koo/www/wordpress/* /home/$1/$2/www/wordpress
+
+echo -e "Завершили\n"
+
+
+
+sudo find /home/$1/$2/www -type f -exec chmod 755 {} \;
+
+sudo find /home/$1/$2/www -type f -exec chmod 644 {} \;
+
+sudo chmod 775 /home/$1/$2/www/wordpress
+
+sudo chown $2:www-data -R /home/$1/$2/www/wordpress
+
+sudo mkdir /home/$1/$2/www/wordpress/wp-content/uploads
+
+sudo chown $2:www-data /home/$1/$2/www/wordpress/wp-content/uploads -R
+
+sudo chmod g+w /home/$1/$2/www/wordpress/wp-content/uploads -R
+
+echo -n "Создание пользователя MySQL и базы данных...  "
+mysql -u root -p1234 <<EOF
+CREATE USER $2@'localhost' IDENTIFIED BY '1234';
+create database $2;
+grant usage on *.* to $2@localhost identified by '1234';
+grant all privileges on $2.* to $2@localhost;
+FLUSH PRIVILEGES;
+EOF
+echo "Завершено"
+echo ""
+
+echo "Создание аккаунта пользователя "$2" завершено!"
+echo -e "\n"
+
