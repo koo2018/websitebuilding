@@ -1,5 +1,8 @@
 #!/bin/bash
 
+apache_vhosts="/etc/apache2/sites-available"
+dbpasswd="1234"
+
 if [ "$#" -eq 0 	]; then
 echo "Нужен хотя бы один параметр"
 echo "Программа остановлена"
@@ -13,8 +16,6 @@ echo 'Пользователя '$1' не существует'
 exit
 fi
 echo ''
-
-apache_vhosts="/etc/apache2/sites-available"
 
 clear
 
@@ -45,7 +46,7 @@ echo "Завершено"
 echo ""
 
 echo -n "Удаление пользователя MySQL и базы данных...  "
-mysql -u root -p1234 <<EOF
+mysql -u root -p$dbpasswd <<EOF
 DROP USER $1@'localhost';
 DROP DATABASE $1;
 FLUSH PRIVILEGES;
