@@ -100,7 +100,7 @@ echo -e "Завершили\n"
 
 
 
-sudo find /home/$1/$2/www -type f -exec chmod 755 {} \;
+sudo find /home/$1/$2/www -type d -exec chmod 755 {} \;
 
 sudo find /home/$1/$2/www -type f -exec chmod 644 {} \;
 
