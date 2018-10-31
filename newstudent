@@ -5,6 +5,7 @@ group_home="/home/$1"
 www="/home/$1/$2/www"
 wordpress="/home/$1/$2/www/wordpress"
 hname="mdc.mba"
+rootdbpasswd="1234"
 dbpasswd="1234"
 
 clear
@@ -116,7 +117,7 @@ sudo chown $2:www-data /home/$1/$2/www/wordpress/wp-content/uploads -R
 sudo chmod g+w /home/$1/$2/www/wordpress/wp-content/uploads -R
 
 echo -n "Создание пользователя MySQL и базы данных...  "
-mysql -u root -p$dbpasswd <<EOF
+mysql -u root -p$rootdbpasswd <<EOF
 CREATE USER $2@'localhost' IDENTIFIED BY '$dbpasswd';
 create database $2;
 grant usage on *.* to $2@localhost identified by '$dbpasswd';
