@@ -4,7 +4,7 @@ apache_vhosts="/etc/apache2/sites-available"
 group_home="/home/$1"
 www="/home/$1/$2/www"
 wordpress="/home/$1/$2/www/wordpress"
-
+hostname="mdc.mba"
 
 clear
 
@@ -64,7 +64,7 @@ echo -e "\nФАЙЛ ДЛЯ АПАЧА\n"
 echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 echo ""
 
-sudo echo "<VirtualHost $2.mediacom.space:80>
+sudo echo "<VirtualHost $2.$hostname:80>
 
 DocumentRoot /home/$1/$2/www
 
@@ -94,7 +94,7 @@ echo ""
 
 echo -n "Копируем папку WordPress...  "
 
-sudo cp -r /home/koo/www/wordpress/* /home/$1/$2/www/wordpress
+sudo cp -r ./wordpress/* /home/$1/$2/www/wordpress
 
 echo -e "Завершили\n"
 
@@ -127,4 +127,3 @@ echo ""
 
 echo "Создание аккаунта пользователя "$2" завершено!"
 echo -e "\n"
-
