@@ -4,7 +4,8 @@ apache_vhosts="/etc/apache2/sites-available"
 group_home="/home/$1"
 www="/home/$1/$2/www"
 wordpress="/home/$1/$2/www/wordpress"
-hostname="mdc.mba"
+hname="mdc.mba"
+dbpasswd="1234"
 
 clear
 
@@ -64,7 +65,7 @@ echo -e "\nФАЙЛ ДЛЯ АПАЧА\n"
 echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 echo ""
 
-sudo echo "<VirtualHost $2.$hostname:80>
+sudo echo "<VirtualHost $2.$hname:80>
 
 DocumentRoot /home/$1/$2/www
 
@@ -100,7 +101,7 @@ echo -e "Завершили\n"
 
 
 
-sudo find /home/$1/$2/www -type d -exec chmod 755 {} \;
+sudo find /home/$1/$2/www -type f -exec chmod 755 {} \;
 
 sudo find /home/$1/$2/www -type f -exec chmod 644 {} \;
 
@@ -115,7 +116,7 @@ sudo chown $2:www-data /home/$1/$2/www/wordpress/wp-content/uploads -R
 sudo chmod g+w /home/$1/$2/www/wordpress/wp-content/uploads -R
 
 echo -n "Создание пользователя MySQL и базы данных...  "
-mysql -u root -p1234 <<EOF
+mysql -u root -p$dbpasswd <<EOF
 CREATE USER $2@'localhost' IDENTIFIED BY '1234';
 create database $2;
 grant usage on *.* to $2@localhost identified by '1234';
