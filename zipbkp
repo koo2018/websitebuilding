@@ -1,0 +1,32 @@
+#!/bin/bash  
+ 
+
+DATE_PREF=`date +%F`
+BACKUPS_DIR="/home/teacher/backups"
+
+
+# создаем директорию для бэкапа, если еще не
+if ! [ -d $BACKUPS_DIR ]; then
+mkdir $BACKUPS_DIR
+fi
+
+
+# создаем дампы баз данных MySQL. Обязательно указываем пользователя и пароль
+mysqldump -q -u root -p1234 -h localhost -A  > $BACKUPS_DIR/$DATE_PREF.sql
+ 
+ 
+cd $BACKUPS_DIR
+
+# создаем tar'ом
+zip -rD -9 $BACKUPS_DIR/$DATE_PREF.zip $DATE_PREF.sql /home/ -x/home/teacher/*
+
+#>/dev/null 2>&1
+
+
+cd $BACKUPS_DIR
+
+rm -f $DATE_PREF.sql 
+
+# ищем файлы старше 14 суток и удаляем их, дабы не засорять жесткий диск
+find ./backups/ -mtime +14 -print -mindepth 1 -delete >/dev/null 2>&1
+
