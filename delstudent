@@ -5,26 +5,38 @@
 #
 
 # пароль администратора базы данных
-rootdbpasswd="1234"
+rootdbpasswd=""
 
 # Дальше править не нужно, если вы не понимаете, что делаете
 
 apache_vhosts="/etc/apache2/sites-available"
 
-
-if [ "$#" -eq 0 	]; then
-echo "Нужен хотя бы один параметр"
-echo "Программа остановлена"
-echo "" 
-exit
+if [ -n $rootdbpasswd ]; then 
+echo -e "Не указан пароль администратора базы данных \$rootdbpasswd. \n"
+stop_var=1
 fi
+
+
+if [ "$#" -eq 0 ]; then
+echo -e 'Для работы программы требуется один параметр\n
+Формат команды \n
+./delstudent studentName \n'
+stop_var=1
+fi
+
+
+
 
 grep "$1:" /etc/passwd >/dev/null
 if [ $? -ne 0 ]; then
-echo 'Пользователя '$1' не существует'
-exit
+echo -e 'Пользователя '$1' не существует\n'
+stop_var=1
 fi
-echo ''
+
+if [ $stop_var ]; then 
+echo -e "Скрипт остановлен \n"
+exit 
+fi
 
 clear
 
@@ -65,4 +77,3 @@ echo ""
 
 echo "Удаление аккаунта пользователя "$1" завершено!"
 echo ""
-
