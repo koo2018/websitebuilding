@@ -1,8 +1,18 @@
 #!/bin/bash  
  
+if [ $SUDO_USER ]; then
+
+TEACHER_NAME=$SUDO_USER
+
+else
+
+TEACHER_NAME=$USER
+
+fi
+
 
 DATE_PREF=`date +%F`
-BACKUPS_DIR="/home/teacher/backups"
+BACKUPS_DIR="/home/$TEACHER_NAME/backups"
 
 
 # создаем директорию для бэкапа, если еще не
@@ -16,7 +26,7 @@ mysqldump -q -u root -p1234 -h localhost -A  > $BACKUPS_DIR/$DATE_PREF.sql
  
 
 # создаем tar'ом
-tar cpf $BACKUPS_DIR/$DATE_PREF.tar --exclude='home/teacher' /home/ 
+tar cpf $BACKUPS_DIR/$DATE_PREF.tar --exclude='home/$TEACHER_NAME' /home/ 
 #>/dev/null 2>&1
 
 
