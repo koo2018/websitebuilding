@@ -1,12 +1,25 @@
 #!/bin/bash
 
+#
+# Здесь можно менять параметры (пробелы вокруг знака равно будут ошибкой)
+#
+
+# ваш домен
+hname="mdc.mba"
+
+# пароль администратора базы данных
+rootdbpasswd="1234"
+
+# пароль, который мы установим студентам на доступ к базе данных
+dbpasswd="1234"
+
+# Дальше править не нужно, если вы не понимаете, что делаете
+
 apache_vhosts="/etc/apache2/sites-available"
 group_home="/home/$1"
 www="/home/$1/$2/www"
 wordpress="/home/$1/$2/www/wordpress"
-hname="mdc.mba"
-rootdbpasswd="1234"
-dbpasswd="1234"
+
 
 clear
 
