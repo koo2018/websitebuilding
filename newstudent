@@ -5,15 +5,47 @@
 #
 
 # ваш домен
-hname="mdc.mba"
+hname=""
 
 # пароль администратора базы данных
-rootdbpasswd="1234"
+rootdbpasswd=""
 
 # пароль, который мы установим студентам на доступ к базе данных
-dbpasswd="1234"
+dbpasswd=""
 
 # Дальше править не нужно, если вы не понимаете, что делаете
+
+
+
+
+
+
+if [ -n $hname ]; then 
+echo -e "Не указано доменное имя в переменной \$hname. \n"
+stop_var=1
+fi
+
+if [ -n $rootdbpasswd ]; then 
+echo -e "Не указан пароль администратора базы данных \$rootdbpasswd. \n"
+stop_var=1
+fi
+
+if [ -n $dbpasswd ]; then 
+echo -e "Не указан пароль пользователя базы данных \$dbpasswd. \n"
+stop_var=1
+fi
+
+if [ $# -ne 2 ]; then
+echo -e 'Для работы программы требуется два параметра\n
+Формат команды \n
+./newstudent groupName studentName \n'
+stop_var=1
+fi
+
+if [ $stop_var ]; then 
+echo -e "Скрипт остановлен \n"
+exit 
+fi
 
 apache_vhosts="/etc/apache2/sites-available"
 group_home="/home/$1"
