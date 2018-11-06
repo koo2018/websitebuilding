@@ -1,7 +1,16 @@
 #!/bin/bash
 
+#
+# Здесь можно менять параметры (пробелы вокруг знака равно будут ошибкой)
+#
+
+# пароль администратора базы данных
+rootdbpasswd="1234"
+
+# Дальше править не нужно, если вы не понимаете, что делаете
+
 apache_vhosts="/etc/apache2/sites-available"
-dbpasswd="1234"
+
 
 if [ "$#" -eq 0 	]; then
 echo "Нужен хотя бы один параметр"
@@ -46,7 +55,7 @@ echo "Завершено"
 echo ""
 
 echo -n "Удаление пользователя MySQL и базы данных...  "
-mysql -u root -p$dbpasswd <<EOF
+mysql -u root -p$rootdbpasswd <<EOF
 DROP USER $1@'localhost';
 DROP DATABASE $1;
 FLUSH PRIVILEGES;
