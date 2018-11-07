@@ -11,7 +11,7 @@ rootdbpasswd=""
 
 apache_vhosts="/etc/apache2/sites-available"
 
-if [ $rootdbpasswd = "" ]; then 
+if [ "$rootdbpasswd" = "" ]; then 
 echo -e "Не указан пароль администратора базы данных \$rootdbpasswd. \n"
 stop_var=1
 fi
