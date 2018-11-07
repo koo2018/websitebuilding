@@ -17,20 +17,17 @@ dbpasswd=""
 
 
 
-
-
-
-if [ -n $hname ]; then 
+if [ "$hname" = "" ]; then 
 echo -e "Не указано доменное имя в переменной \$hname. \n"
 stop_var=1
 fi
 
-if [ -n $rootdbpasswd ]; then 
+if [ "$rootdbpasswd" = "" ]; then 
 echo -e "Не указан пароль администратора базы данных \$rootdbpasswd. \n"
 stop_var=1
 fi
 
-if [ -n $dbpasswd ]; then 
+if [ "$dbpasswd" = "" ]; then 
 echo -e "Не указан пароль пользователя базы данных \$dbpasswd. \n"
 stop_var=1
 fi
