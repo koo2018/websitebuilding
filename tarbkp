@@ -1,18 +1,21 @@
 #!/bin/bash  
+
+#
+# Здесь можно менять параметры (пробелы вокруг знака равно будут ошибкой)
+#
  
-if [ $SUDO_USER ]; then
+# аккаунт учителя. нужен чтобы исключить из бэкапа
+# тк cron, автоматическое определение лучше не использовать
+TEACHER_NAME="teacher" 
 
-TEACHER_NAME=$SUDO_USER
+# директория, где будет храниться бэкап
+BACKUPS_DIR="/home/$TEACHER_NAME/backups"
 
-else
-
-TEACHER_NAME=$USER
-
-fi
+# Дальше править не нужно, если вы не понимаете, что делаете
 
 
 DATE_PREF=`date +%F`
-BACKUPS_DIR="/home/$TEACHER_NAME/backups"
+
 
 
 # создаем директорию для бэкапа, если еще не
@@ -26,7 +29,7 @@ mysqldump -q -u root -p1234 -h localhost -A  > $BACKUPS_DIR/$DATE_PREF.sql
  
 
 # создаем tar'ом
-tar cpf $BACKUPS_DIR/$DATE_PREF.tar --exclude='home/$TEACHER_NAME' /home/ 
+tar cpf $BACKUPS_DIR/$DATE_PREF.tar --exclude='home/'$TEACHER_NAME /home/ 
 #>/dev/null 2>&1
 
 
