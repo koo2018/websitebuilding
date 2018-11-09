@@ -1,17 +1,20 @@
 #!/bin/bash  
  
-if [ $SUDO_USER ]; then
+#
+# Здесь можно менять параметры (пробелы вокруг знака равно будут ошибкой)
+#
+ 
+# аккаунт учителя. нужен чтобы исключить из бэкапа
+# тк cron, автоматическое определение лучше не использовать
+TEACHER_NAME="teacher" 
 
-TEACHER_NAME=$SUDO_USER
+# директория, где будет храниться бэкап
+BACKUPS_DIR="/home/$TEACHER_NAME/backups"
 
-else
+# Дальше править не нужно, если вы не понимаете, что делаете
 
-TEACHER_NAME=$USER
-
-fi
 
 DATE_PREF=`date +%F`
-BACKUPS_DIR="/home/$TEACHER_NAME/backups"
 
 
 # создаем директорию для бэкапа, если еще не
