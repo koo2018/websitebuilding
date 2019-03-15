@@ -6,11 +6,11 @@
 #
 ##########################
 
-new_wordpress_url="https://ru.wordpress.org/wordpress-4.9.8-ru_RU.zip"
+new_wordpress_url="https://ru.wordpress.org/last-ru_RU.zip"
 
 #########################
 
-sudo apt-get -y install mc bash-completion dnsutils lynx man proftpd htop zip unzip ca-certificates apache2 
+sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 
 
 sudo apt-get -y install mysql-client mysql-server php7.0 php7.0-fpm php7.0-gd php7.0-mysql php7.0-curl php7.0-json 
 
@@ -30,9 +30,9 @@ cd
 
 wget $new_wordpress_url 
 
-unzip wordpress-4.9.8-ru_RU.zip 
+unzip last-ru_RU.zip 
 
-rm -f wordpress-4.9.8-ru_RU.zip 
+rm -f last-ru_RU.zip 
 
 wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/newstudent
 
