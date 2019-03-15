@@ -52,8 +52,6 @@ echo "Базовый сайт будет располагаться по адр�
 
 echo "Студенческие сайты будут располагаться по адресу http://studentname.$domain"
 
-exit
-
 sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 
 
 sudo apt-get -y install mysql-client mysql-server php7.0 php7.0-fpm php7.0-gd php7.0-mysql php7.0-curl php7.0-json 
@@ -126,4 +124,8 @@ echo -e '\n\n EVERYTHING IS DONE. REBOOTING . . . \n\n DO NOT FOREGET TO DROP IN
 
 touch .websitebuilding
 
-sudo reboot now
+sudo rm -f wsite_install
+
+sudo reboot now 
+
+
