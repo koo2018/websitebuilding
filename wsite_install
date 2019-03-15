@@ -59,9 +59,9 @@ done
 
 echo
 
-echo "Базовый сайт будет располагаться по адресу http://$domain"
+echo -e "\nБазовый сайт будет располагаться по адресу http://$domain"
 
-echo "Студенческие сайты будут располагаться по адресу http://studentname.$domain"
+echo -e "\nСтуденческие сайты будут располагаться по адресу http://studentname.$domain"
 
 sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 
 
@@ -105,7 +105,7 @@ chmod 700 ./zipbkp
 
 clear 
 
-echo -e "\ny\n1234\n1234\ny\ny\ny\ny" | sudo /usr/bin/mysql_secure_installation
+echo -e "\ny\n$password\n$password\ny\ny\ny\ny" | sudo /usr/bin/mysql_secure_installation
 
 echo -e "use mysql; update user set plugin='' where User='root'; flush privileges;" | sudo mysql 
 
