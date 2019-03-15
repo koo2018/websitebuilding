@@ -1,16 +1,11 @@
 #!/bin/bash
 
-###########################
-#
-#  Укажите URL версии WordPress
-#
-##########################
-
 new_wordpress_url="https://ru.wordpress.org/last-ru_RU.zip"
 
-#########################
+curuser=$LOGNAME
 
-clear
+curhom=$HOME
+
 
 echo -e "Вас привествует система установки и настройки виртуального хостинга"
 
@@ -36,25 +31,157 @@ echo -n "Укажите базовый домен вашего сервера, �
 
 read domain
 
-echo 
-
-echo -n "Укажите пароль для базы данных: "
-
-while IFS= read -p "$prompt" -r -s -n 1 char
+until [[ $passwd_ok == 'ok' && $dbrootpassword != '' ]]
 
 do
-    # Enter - accept password
-    if [[ $char == $'\0' ]] ; then
-        break
-    fi
-    # Backspace
-    if [[ $char == $'\177' ]] ; then
-        prompt=$'\b \b'
-        password="${password%?}"
-    else
-        prompt='*'
-        password+="$char"
-    fi
+
+	echo -ne "\nУкажите пароль для базы данных: "
+
+	while IFS= read -p "$prompt" -r -s -n 1 char
+
+	do
+    	# Enter - accept password
+    	if [[ $char == $'\0' ]] ; then
+        	break
+    	fi
+    	# Backspace
+    	if [[ $char == $'\177' ]] ; then
+        	prompt=$'\b \b'
+        	dbrootpassword="${dbrootpassword%?}"
+    	else
+        	prompt='*'
+        	dbrootpassword+="$char"
+    	fi
+	done
+
+	prompt=''
+
+	echo -ne "\nВведите пароль еще раз: "
+
+	while IFS= read -p "$prompt" -r -s -n 1 char
+
+	do
+    	# Enter - accept password
+    	if [[ $char == $'\0' ]] ; then
+        	break
+    	fi
+    	# Backspace
+    	if [[ $char == $'\177' ]] ; then
+        	prompt=$'\b \b'
+        	dbrootpassword1="${dbrootpassword1%?}"
+    	else
+        	prompt='*'
+        	dbrootpassword1+="$char"
+    	fi
+	done
+
+	if [[ $dbrootpassword == $dbrootpassword1 && $dbrootpassword != '' ]] ; then
+	
+    	echo -e "\nПароль успешно установлен"
+    
+    	passwd_ok="ok"
+    	
+	elif [[ $dbrootpassword == '' ]] ; then
+    	
+    	echo -e "\nПароль не может быть пустым"
+    
+    	passwd_ok='ok'
+    
+    	prompt=''
+    
+	else
+    	
+    	echo -e "\nПароль не не совпадает. Введите заново"
+    
+    	ok=''
+    
+    	prompt=''
+    
+    	dbrootpassword=''
+    	
+    	dbrootpassword1=''
+	
+	fi	
+
+done
+
+#  Установить пароль для студентов
+
+passwd_ok=''
+prompt=''
+
+until [[ $passwd_ok == 'ok' && $dbuserpassword != '' ]]
+
+do
+
+	echo -ne "\nУкажите студенческий пароль для базы данных: "
+
+	while IFS= read -p "$prompt" -r -s -n 1 char
+
+	do
+    	# Enter - accept password
+    	if [[ $char == $'\0' ]] ; then
+        	break
+    	fi
+    	# Backspace
+    	if [[ $char == $'\177' ]] ; then
+        	prompt=$'\b \b'
+        	dbuserpassword="${dbuserpassword%?}"
+    	else
+        	prompt='*'
+        	dbuserpassword+="$char"
+    	fi
+	done
+
+	prompt=''
+
+	echo -ne "\nВведите студенческий пароль еще раз: "
+
+	while IFS= read -p "$prompt" -r -s -n 1 char
+
+	do
+    	# Enter - accept password
+    	if [[ $char == $'\0' ]] ; then
+        	break
+    	fi
+    	# Backspace
+    	if [[ $char == $'\177' ]] ; then
+        	prompt=$'\b \b'
+        	dbuserpassword1="${dbuserpassword1%?}"
+    	else
+        	prompt='*'
+        	dbuserpassword1+="$char"
+    	fi
+	done
+
+	if [[ $dbuserpassword == $dbuserpassword1 && $dbuserpassword != '' ]] ; then
+	
+    	echo -e "\nПароль для студентов успешно установлен"
+    
+    	passwd_ok="ok"
+    	
+	elif [[ $dbuserpassword == '' ]] ; then
+    	
+    	echo -e "\nПароль не может быть пустым"
+    
+    	passwd_ok='ok'
+    
+    	prompt=''
+    
+	else
+    	
+    	echo -e "\nПароль не не совпадает. Введите заново"
+    
+    	ok=''
+    
+    	prompt=''
+    
+    	dbuserpassword=''
+    	
+    	dbuserpassword1=''
+	
+	fi	
+
 done
 
 echo
@@ -95,17 +222,53 @@ wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/tarbkp
 
 wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/zipbkp 
 
+chmod 700 ./zipbkp 
+
+echo "Настраиваем скрипт newstudent"
+
+sudo sh -c "sed -e 's/hname=\"\"/hname=\"$domain\"/' newstudent > newstudent.new" 
+
+sudo mv newstudent{.new,} 
+
+sudo sh -c "sed -e 's/rootdbpasswd=\"\"/rootdbpasswd=\"$dbrootpassword\"/' newstudent > newstudent.new" 
+
+sudo mv newstudent{.new,} 
+
+sudo sh -c "sed -e 's/dbpasswd=\"\"/dbpasswd=\"$dbuserpassword\"/' newstudent > newstudent.new" 
+
+sudo mv newstudent{.new,} 
+
+sudo chown $curuser:$curuser newstudent
+
 chmod 700 ./newstudent
+
+echo "Настраиваем скрипт delstudent"
+
+sudo sh -c "sed -e 's/rootdbpasswd=\"\"/rootdbpasswd=\"$dbrootpassword\"/' delstudent > delstudent.new" 
+
+sudo mv delstudent{.new,} 
+
+sudo chown $curuser:$curuser delstudent
 
 chmod 700 ./delstudent
 
-chmod 700 ./tarbkp 
+echo "Настраиваем скрипт tarbkp"
 
-chmod 700 ./zipbkp 
+sudo sh -c "sed -e 's/TEACHER_NAME=\"\"/TEACHER_NAME=\"$curuser\"/' tarbkp > tarbkp.new" 
 
-clear 
+sudo mv tarbkp{.new,} 
 
-echo -e "\ny\n$password\n$password\ny\ny\ny\ny" | sudo /usr/bin/mysql_secure_installation
+sudo sh -c "sed -e 's/BACKUPS_DIR=\"\"/BACKUPS_DIR=\"${curhom}\"/' tarbkp > tarbkp.new" 
+
+sudo mv tarbkp{.new,} 
+
+sudo chown $curuser:$curuser tarbkp
+
+chmod 700 ./tarbkp
+
+exit
+
+echo -e "\ny\n$dbrootpassword\n$dbrootpassword\ny\ny\ny\ny" | sudo /usr/bin/mysql_secure_installation
 
 echo -e "use mysql; update user set plugin='' where User='root'; flush privileges;" | sudo mysql 
 
