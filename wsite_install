@@ -4,8 +4,7 @@ new_wordpress_url="https://ru.wordpress.org/last-ru_RU.zip"
 
 curuser=$LOGNAME
 
-curhom=$HOME
-
+curhom=`echo $HOME | sed -e 's/\//\\\\\//g'`
 
 echo -e "Вас привествует система установки и настройки виртуального хостинга"
 
@@ -222,8 +221,6 @@ wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/tarbkp
 
 wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/zipbkp 
 
-chmod 700 ./zipbkp 
-
 echo "Настраиваем скрипт newstudent"
 
 sudo sh -c "sed -e 's/hname=\"\"/hname=\"$domain\"/' newstudent > newstudent.new" 
@@ -258,13 +255,27 @@ sudo sh -c "sed -e 's/TEACHER_NAME=\"\"/TEACHER_NAME=\"$curuser\"/' tarbkp > tar
 
 sudo mv tarbkp{.new,} 
 
-sudo sh -c "sed -e 's/BACKUPS_DIR=\"\"/BACKUPS_DIR=\"${curhom}\"/' tarbkp > tarbkp.new" 
+sudo sh -c "sed -e 's/BACKUPS_DIR=\"\"/BACKUPS_DIR=\"$curhom\/backups\"/' tarbkp > tarbkp.new" 
 
 sudo mv tarbkp{.new,} 
 
 sudo chown $curuser:$curuser tarbkp
 
 chmod 700 ./tarbkp
+
+echo "Настраиваем скрипт zipbkp"
+
+sudo sh -c "sed -e 's/TEACHER_NAME=\"\"/TEACHER_NAME=\"$curuser\"/' zipbkp > zipbkp.new" 
+
+sudo mv zipbkp{.new,} 
+
+sudo sh -c "sed -e 's/BACKUPS_DIR=\"\"/BACKUPS_DIR=\"$curhom\/backups\"/' zipbkp > zipbkp.new" 
+
+sudo mv zipbkp{.new,} 
+
+sudo chown $curuser:$curuser zipbkp
+
+chmod 700 ./zipbkp
 
 exit
 
