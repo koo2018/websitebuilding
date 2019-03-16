@@ -51,15 +51,17 @@ sudo addgroup grp1801
 
 3. Повторяете эту процедуру столько, сколько нужно. Копи-пейст и стрелочка вверх в помощь
 
-```bash
-  ./newstudent grp1801 grp1801st02
+ ```bash
+./newstudent grp1801 grp1801st02
 
-  ./newstudent grp1801 grp1801st03
-
-  ./newstudent grp1801 grp1801st99
-
+./newstudent grp1801 grp1801st03
+  
 ...
-```
+
+./newstudent grp1801 grp1801st99
+
+
+ ```
 
 4. Каждому студенту надо будет задать пароль.
 
