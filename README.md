@@ -16,6 +16,7 @@ wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_inst
 
 ```
 5. Сделайте скрипт исполняемым и нечитаемым никем, кроме пользователя - все-таки там пароль от MySQL в открытом виде :unamused:
+
 ```bash
 
 chmod 700 ./wsite_install
