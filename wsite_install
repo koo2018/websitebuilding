@@ -6,7 +6,7 @@ curuser=$LOGNAME
 
 curhom=`echo $HOME | sed -e 's/\//\\\\\//g'`
 
-echo -e "Вас привествует система установки и настройки виртуального хостинга"
+echo -e "Вас приветствует система установки и настройки виртуального хостинга"
 
 if [ -f ".websitebuilding" ]; then 
 
@@ -310,3 +310,5 @@ echo -e '\n\n EVERYTHING IS DONE. REBOOTING . . . \n\n DO NOT FOREGET TO DROP IN
 #sudo rm -f wsite_install
 
 sudo reboot now 
+
+
