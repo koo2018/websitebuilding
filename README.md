@@ -14,10 +14,6 @@ https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install
 3. Сделайте скрипт исполняемым
 ```bash
 
-https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install
-
-```bash
-
 chmod 700 ./wsite_install
 
 ```
