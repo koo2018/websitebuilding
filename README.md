@@ -7,8 +7,8 @@
 ## Установка
 
 1. Установите свежий инстанс Debian 9 на VPS/VDS хостинг.
-2. Под рутом скопируйте в командную строку содержимое файла [under_root](https://raw.githubusercontent.com/koo2018/websitebuilding/master/under_root). Этот скрипт создаст пользователя teacher и попросит установить ему пароль.
-3. Выйдите из системы и вернитесь под пользователем teacher
+2. Под пользователем ***root*** скопируйте в командную строку содержимое файла [under_root](https://raw.githubusercontent.com/koo2018/websitebuilding/master/under_root). Этот скрипт создаст пользователя ***teacher*** и попросит установить ему пароль.
+3. Выйдите из системы и вернитесь под пользователем ***teacher***
 4. Скачайте скрипт [wsite_install](https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install), например, командой 
 ```bash
 
