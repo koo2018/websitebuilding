@@ -259,6 +259,11 @@ sudo sh -c "sed -e 's/BACKUPS_DIR=\"\"/BACKUPS_DIR=\"$curhom\/backups\"/' tarbkp
 
 sudo mv tarbkp{.new,} 
 
+sudo sh -c "sed -e 's/root -p1234/root -p$dbrootpassword/' tarbkp > tarbkp.new" 
+
+sudo mv tarbkp{.new,} 
+
+
 sudo chown $curuser:$curuser tarbkp
 
 chmod 700 ./tarbkp
@@ -270,6 +275,10 @@ sudo sh -c "sed -e 's/TEACHER_NAME=\"\"/TEACHER_NAME=\"$curuser\"/' zipbkp > zip
 sudo mv zipbkp{.new,} 
 
 sudo sh -c "sed -e 's/BACKUPS_DIR=\"\"/BACKUPS_DIR=\"$curhom\/backups\"/' zipbkp > zipbkp.new" 
+
+sudo mv zipbkp{.new,} 
+
+sudo sh -c "sed -e 's/root -p1234/root -p$dbrootpassword/' zipbkp > zipbkp.new" 
 
 sudo mv zipbkp{.new,} 
 
