@@ -1,6 +1,6 @@
 #!/bin/bash
 
-new_wordpress_url="https://ru.wordpress.org/last-ru_RU.zip"
+new_wordpress_url="https://ru.wordpress.org/latest-ru_RU.zip"
 
 curuser=$LOGNAME
 
