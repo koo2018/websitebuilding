@@ -7,7 +7,7 @@
 ## Установка
 
 1. Установите свежий инстанс Debian 9 на VPS/VDS хостинг.
-2. Под пользователем ***root*** скопируйте в командную строку содержимое файла [under_root](https://raw.githubusercontent.com/koo2018/websitebuilding/master/under_root). Этот скрипт создаст пользователя ***teacher***, попросит установить ему пароль, скачает скрипт [wsite_install](https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install), сделает его читаемым только пользователем ***teacher*** и выйдет из рутового аккаунта.
+2. Под пользователем ***root*** скопируйте в командную строку содержимое файла [under_root](https://raw.githubusercontent.com/koo2018/websitebuilding/master/under_root). Этот скрипт создаст пользователя ***teacher***, попросит установить ему пароль, в рабочую директорию ***~teacher*** скачает скрипт [wsite_install](https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install), сделает его читаемым только пользователем ***teacher*** и выйдет из рутового аккаунта.
 3. Вернитесь в систему под пользователем ***teacher***
 4. Запустите скрипт [wsite_install](https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install). Надо будет указать основной домен вашего сервера, пароль администратора MySQL, а также стандартный пароль, который получат пользователи по умолчанию.
 5. Скрипт установит все пакеты, скачает WordPress, скачает и настроит скрипты автоматизации создния пользовательских аккаунтов. По завершению работы скрипт удалит сам себя и перезагрузит сервер. Вернитесь и начинайте работу с аккаунтами пользователей/студентов. 
