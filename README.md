@@ -49,7 +49,7 @@ sudo addgroup grp1801
 ./newstudent grp1801 grp1801st99
  ```
 
-4. Каждому студенту надо будет задать пароль.
+4. Каждому студенту будет назначен пароль, который запрашивал скрипт [wsite_install](https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install).
 
 5. По адресу http://grp1801st01.вашдомен появляется пустой сайт, а по адресу http://grp1801st01.вашдомен/wordpress появляется ваш сайт на WordPress, при первой загрузке которого вам предложат его установить и настроить. Админка студенческого сайта http://grp1801st01.вашдомен/wordpress/wp-admin.
 
