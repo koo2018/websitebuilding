@@ -51,7 +51,16 @@ www="/home/$1/$2/www"
 wordpress="/home/$1/$2/www/wordpress"
 
 
-clear
+grp=`grep "^$1:" /etc/group`
+if [[ $grp == '' ]]; then
+echo 'Создаем группу '$2
+sudo addgroup $1
+else
+echo 'Группа '$1' уже существует' 
+fi
+echo ''
+
+
 
 echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 echo "*"
