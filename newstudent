@@ -68,12 +68,13 @@ echo 'Директория группы '$1' уже создана'
 fi
 echo ''
 
-grep "$2:" /etc/passwd >/dev/null
-if [ $? -ne 0 ]; then
+usr=`grep "^$2:" /etc/passwd`
+if [[ $usr == '' ]]; then
 echo 'Создаем пользователя '$2
 sudo useradd -b /home/$1 -g $1 -m -s /bin/bash $2
 else
 echo 'Пользователь '$2' уже существует'
+exit 
 fi
 echo ''
 
