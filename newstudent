@@ -103,7 +103,7 @@ echo ''
 
 echo -e "Устанавливаем пароль для "$2"\n"
 
-sudo passwd $2
+echo -e "$dbpasswd\n$dbpasswd\n" | sudo passwd $2
 
 echo -e "\nФАЙЛ ДЛЯ АПАЧА\n"
 echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
