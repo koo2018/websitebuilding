@@ -209,9 +209,9 @@ cd
 
 wget $new_wordpress_url 
 
-unzip last-ru_RU.zip 
+unzip latest-ru_RU.zip 
 
-rm -f last-ru_RU.zip 
+rm -f latest-ru_RU.zip 
 
 wget https://raw.githubusercontent.com/koo2018/websitebuilding/master/newstudent
 
