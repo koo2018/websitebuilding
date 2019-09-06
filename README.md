@@ -48,6 +48,12 @@ sudo addgroup grp1801
 
 ./newstudent grp1801 grp1801st99
  ```
+ 
+ Этот процесс, конечно же, можно автоматизировать. Например, так:
+ 
+ ```bash
+ for run in {01..40}; do ./newstudent grp1801 grp1801st$run; done;  
+```
 
 4. Каждому студенту будет назначен пароль. Это будет студенческий/пользовательский пароль, который запрашивал скрипт [wsite_install](https://raw.githubusercontent.com/koo2018/websitebuilding/master/wsite_install).
 
