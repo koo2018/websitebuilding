@@ -125,7 +125,7 @@ DocumentRoot /home/$1/$2/www
 
 <Directory /home/$1/$2/www>
         Options Indexes FollowSymLinks
-        AllowOverride None
+        AllowOverride All
         Require all granted
 </Directory>
 ErrorLog ${APACHE_LOG_DIR}/error.log
