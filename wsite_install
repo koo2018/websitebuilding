@@ -189,7 +189,7 @@ echo -e "\nБазовый сайт будет располагаться по а
 
 echo -e "\nСтуденческие сайты будут располагаться по адресу http://studentname.$domain"
 
-sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 
+sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 bash-completion whois 
 
 sudo apt-get -y install mysql-client mysql-server php7.0 php7.0-fpm php7.0-gd php7.0-mysql php7.0-curl php7.0-json 
 
@@ -201,7 +201,13 @@ sudo sh -c "sed -e 's/#AddDefaultCharset UTF-8/AddDefaultCharset UTF-8/' /etc/ap
 
 sudo mv /etc/apache2/conf-available/charset.conf{.new,} 
 
-sudo a2enmod proxy_fcgi setenvif 
+sudo cp /etc/apache2/sites-available/000-default.conf{,.bak}  
+
+sudo sh -c "sed -e 's/VirtualHost *:80/VirtualHost $domain:80/' /etc/apache2/sites-available/000-default.conf > /etc/apache2/sites-available/000-default.conf.new" 
+
+sudo mv /etc/apache2/sites-available/000-default.conf{.new,} 
+
+sudo a2enmod proxy_fcgi setenvif rewrite
 
 sudo a2enconf php7.0-fpm 
 
