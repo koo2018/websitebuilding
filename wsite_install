@@ -320,7 +320,7 @@ sudo sh -c "sed -e 's/max_connections        = 100/max_connections        = 200/
 
 sudo mv /etc/mysql/mariadb.conf.d/50-server.cnf{.new,} && sudo cp  /etc/php/8.0/fpm/php.ini{,.bak} 
 
-sudo sh -c "sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 50M/' /etc/php/8.0/fpm/php.ini > /etc/php/7./fpm/php.ini.new"
+sudo sh -c "sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 50M/' /etc/php/8.0/fpm/php.ini > /etc/php/8.0/fpm/php.ini.new"
 
 sudo mv /etc/php/8.0/fpm/php.ini{.new,}  
 
