@@ -201,7 +201,7 @@ sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apach
 
 sudo apt-get -y install mysql-client mysql-server php8.0 php8.0-fpm php8.0-gd php8.0-mysql php8.0-curl php8.0-json 
 
-sudo apr-get -y install php8.0-mbstring php8.0-xml memcached php-memcache 
+sudo apt-get -y install php8.0-mbstring php8.0-xml memcached php-memcache 
 
 sudo cp /etc/apache2/conf-available/charset.conf{,.bak}  
 
