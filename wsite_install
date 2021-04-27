@@ -199,9 +199,7 @@ sudo apt install apt-transport-https lsb-release ca-certificates wget -y
 
 sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 bash-completion whois 
 
-sudo apt-get -y install mysql-client mysql-server php php-fpm php-gd php-mysql php-curl php-json 
-
-read
+sudo apt-get -y install mariadb-client mariadb-server php php-fpm php-gd php-mysql php-curl php-json libapache2-mod-php
 
 sudo apt-get -y install php-mbstring php-xml memcached php-memcache 
 
