@@ -191,17 +191,19 @@ echo -e "\nСтуденческие сайты будут располагать
 
 sudo apt install apt-transport-https lsb-release ca-certificates wget -y
 
-sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg 
+#sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg 
 
-sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+#sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
-sudo apt update
+#sudo apt update
 
 sudo apt-get -y install mc lynx man proftpd htop zip unzip ca-certificates apache2 bash-completion whois 
 
-sudo apt-get -y install mysql-client mysql-server php8.0 php8.0-fpm php8.0-gd php8.0-mysql php8.0-curl php-json 
+sudo apt-get -y install mysql-client mysql-server php php-fpm php-gd php-mysql php-curl php-json 
 
-sudo apt-get -y install php8.0-mbstring php8.0-xml memcached php-memcache 
+read
+
+sudo apt-get -y install php-mbstring php-xml memcached php-memcache 
 
 sudo cp /etc/apache2/conf-available/charset.conf{,.bak}  
 
@@ -217,7 +219,7 @@ sudo mv /etc/apache2/sites-available/000-default.conf{.new,}
 
 sudo a2enmod proxy_fcgi setenvif rewrite
 
-sudo a2enconf php8.0-fpm 
+sudo a2enconf php-fpm 
 
 cd 
 
