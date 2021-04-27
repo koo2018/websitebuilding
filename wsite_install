@@ -320,7 +320,9 @@ sudo sh -c "sed -e 's/max_connections        = 100/max_connections        = 200/
 
 sudo mv /etc/mysql/mariadb.conf.d/50-server.cnf{.new,}  
 
-php_path=`php -i | grep "Loaded Configuration File" | awk -F "=>" '{print $2}'` && echo "${php_path/cli/fpm}"
+php_path=`php -i | grep "Loaded Configuration File" | awk -F "=>" '{print $2}'` 
+
+php_path=`echo "${php_path/cli/fpm}"`
 
 sudo cp  $php_path{,.bak} 
 
