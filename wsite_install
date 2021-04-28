@@ -211,7 +211,7 @@ sudo mv /etc/apache2/conf-available/charset.conf{.new,}
 
 sudo cp /etc/apache2/sites-available/000-default.conf{,.bak}  
 
-sudo sh -c "sed -e 's/VirtualHost *:80/VirtualHost $domain:80/' /etc/apache2/sites-available/000-default.conf > /etc/apache2/sites-available/000-default.conf.new" 
+sudo sh -c "sed -e 's/VirtualHost \*:80/VirtualHost $domain:80/' /etc/apache2/sites-available/000-default.conf > /etc/apache2/sites-available/000-default.conf.new" 
 
 sudo mv /etc/apache2/sites-available/000-default.conf{.new,} 
 
