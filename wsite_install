@@ -217,7 +217,9 @@ sudo mv /etc/apache2/sites-available/000-default.conf{.new,}
 
 sudo a2enmod proxy_fcgi setenvif rewrite
 
-sudo a2enmod php-fpm 
+php_version=`php -i | grep "Loaded Configuration File" | awk -F "=>" '{print $2}' | awk -F "/" '{print $4}'`
+
+sudo a2enmod php$php_version
 
 cd 
 
